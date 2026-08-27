@@ -1,8 +1,22 @@
-# Skill Optimizer — Plugin OpenClaw
+<div align="center">
 
-Plugin **Skill Optimizer** membuat agen OpenClaw Anda memakai skill yang sudah ter-install secara **jauh lebih optimal**. Tanpa plugin ini, agen sering "lupa" bahwa ada skill panduan untuk tugas tertentu — LLM hanya menebak dari daftar singkat skill di system prompt. Plugin ini memindai seluruh `SKILL.md` milik Anda, lalu **menganalisis tiap pesan pengguna** dan menyuntikkan ringkasan skill yang benar-benar relevan ke konteks prompt, tepat sebelum agen berpikir.
+![Skill Optimizer](assets/banner.svg)
+
+# 🔧 Skill Optimizer — Plugin OpenClaw
+
+**Elite skill routing untuk OpenClaw** — rekomendasi skill otomatis per pesan (hybrid TF-IDF + LLM), tool `recommend_skills`, dan perintah `/skills`.
+
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-plugin-9cf.svg?style=for-the-badge)](https://github.com/openclaw/openclaw)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![ClawHub](https://img.shields.io/badge/ClawHub-published-orange?style=for-the-badge)](https://clawhub.ai)
+
+</div>
+
+--- Tanpa plugin ini, agen sering "lupa" bahwa ada skill panduan untuk tugas tertentu — LLM hanya menebak dari daftar singkat skill di system prompt. Plugin ini memindai seluruh `SKILL.md` milik Anda, lalu **menganalisis tiap pesan pengguna** dan menyuntikkan ringkasan skill yang benar-benar relevan ke konteks prompt, tepat sebelum agen berpikir.
 
 Semua fitur dirancang *fail-safe*: kalau satu bagian gagal (folder kosong, LLM tidak tersedia, API host beda versi), plugin tidak pernah mengganggu balasan normal gateway.
+
+[What it does](#fitur) · [How it works](#cara-kerja) · [Installation](#instalasi) · [Usage](#pemakaian) · [Repo layout](#repo-layout) · [Local dev](#local-dev) · [Notes](#notes)
 
 ---
 
