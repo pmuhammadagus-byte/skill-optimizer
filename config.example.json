@@ -1,0 +1,38 @@
+{
+  "_comment": "Contoh blok konfigurasi untuk ~/.openclaw/openclaw.json. Salin bagian yang perlu saja ke file config utama Anda, jangan menimpa seluruh isi.",
+  "plugins": {
+    "entries": {
+      "skill-optimizer": {
+        "enabled": true,
+        "hooks": {
+          "allowConversationAccess": true
+        },
+        "config": {
+          "scanPaths": [],
+          "includeDefaultPaths": true,
+          "inject": {
+            "enabled": true,
+            "topK": 3,
+            "minScore": 0.18,
+            "maxChars": 900,
+            "skipCommands": true,
+            "dedupWindowMs": 90000
+          },
+          "semantic": {
+            "enabled": true,
+            "strongScore": 0.45,
+            "threshold": 0.3,
+            "timeoutMs": 6000,
+            "provider": "auto"
+          },
+          "stats": {
+            "enabled": true
+          },
+          "commands": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  }
+}

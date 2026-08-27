@@ -1,0 +1,75 @@
+{
+  "id": "skill-optimizer",
+  "name": "Skill Optimizer",
+  "description": "Menganalisis tiap pesan pengguna, lalu otomatis merekomendasikan skill yang relevan ke konteks agen (hybrid: TF-IDF keyword + fallback semantic LLM). Menyediakan tool recommend_skills dan perintah /skills.",
+  "contracts": {
+    "tools": ["recommend_skills"]
+  },
+  "toolMetadata": {
+    "recommend_skills": {}
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "scanPaths": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Folder tambahan berisi skill (masing-masing subfolder wajib punya SKILL.md)."
+      },
+      "includeDefaultPaths": {
+        "type": "boolean",
+        "default": true,
+        "description": "Scan juga lokasi bawaan: <cwd>/skills, ~/.openclaw/workspace/skills, ~/.openclaw/skills, ~/.claude/skills."
+      },
+      "inject": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true },
+          "topK": { "type": "integer", "minimum": 1, "maximum": 10, "default": 3 },
+          "minScore": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.18 },
+          "maxChars": { "type": "integer", "minimum": 200, "maximum": 4000, "default": 900 },
+          "skipCommands": { "type": "boolean", "default": true },
+          "dedupWindowMs": { "type": "integer", "minimum": 0, "default": 90000 }
+        }
+      },
+      "semantic": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true },
+          "strongScore": {
+            "type": "number",
+            "default": 0.45,
+            "description": "Jika skor keyword terbaik >= nilai ini, fallback LLM dilewati."
+          },
+          "threshold": { "type": "number", "default": 0.3 },
+          "timeoutMs": { "type": "integer", "default": 6000 },
+          "provider": { "type": "string", "enum": ["auto", "zai", "openai"], "default": "auto" },
+          "openaiBaseUrl": { "type": "string" },
+          "openaiApiKey": { "type": "string" },
+          "openaiModel": { "type": "string", "default": "gpt-4o-mini" }
+        }
+      },
+      "stats": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true },
+          "file": { "type": "string", "description": "Path file JSON penyimpanan statistik." }
+        }
+      },
+      "commands": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true }
+        }
+      }
+    }
+  }
+}
